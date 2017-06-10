@@ -1,11 +1,18 @@
-(function canAutoplay() {
-  window.autoplay = false;
-  const video = document.create
-}());
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
+  const addHover = () => stage.classList.add('hover');
+  const removeHover = () => stage.classList.remove('hover');
+  const toggleHover = (event) => {
+    event.stopPropagation();
+    if (stage.classList.contains('hover')) {
+      removeHover();
+    } else {
+      addHover();
+    }
+  };
+
+  stage.addEventListener('touchstart', () => stage.setAttribute('data-touch', 'true'));
+  stage.addEventListener('touchend', toggleHover);
 
   const requestMaker = function (searchTerm = 'raccoon') {
     return new Request(`https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=${searchTerm}`, {
@@ -55,9 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
           media.title = "Trash Panda";
         }
 
-        media.addEventListener(ready, () => {
-          stage.classList.add('hover');
-        });
+        const onready = () => {
+          console.log('ready')
+          stage.removeAttribute('disabled');
+          media.removeEventListener(ready, onready)
+        }
+
+        media.addEventListener(ready, onready);
 
         stage.insertAdjacentElement('beforeEnd', media);
       });

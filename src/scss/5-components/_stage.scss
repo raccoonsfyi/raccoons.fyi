@@ -27,9 +27,9 @@
     transform: matrix(-1, 0, 0, 1, 0, 0);
   }
 
-  // &:hover:not([disabled]):not([data-touch]),
-  // &.hover:not([disabled]) {
-  &.hover {
+  &:hover:not([disabled]):not([data-touch]),
+  &.hover:not([disabled]) {
+  // &.hover {
     [class*="-left"] {
       width: 0;
       transform: matrix(1, 0, -0.2, 1, 0, 0);
