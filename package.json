@@ -4,21 +4,24 @@
   "description": "Front end project",
   "main": "build/index.html",
   "scripts": {
-    "build": "npm run clean && npm run build:init && npm run build:html && npm run build:styles && npm run build:scripts",
+    "build": "npm run clean && npm run build:init && npm run build:html && npm run build:styles && npm run build:scripts && npm run build:imgs && npm run build:favicons",
     "build:init": "mkdir build",
     "build:html": "cp src/*.html build/",
-    "build:scripts": "npm run lint:scripts && npm run prebuild:scripts && babel ./src/js/scripts.js -o ./build/assets/js/scripts.js --presets es2015",
+    "build:scripts": "npm run prebuild:scripts && babel ./src/js/scripts.js -o ./build/assets/js/scripts.js --presets es2015",
     "build:styles": "npm run lint:styles && node-sass src/scss/styles.scss -o build/assets/css/ && postcss ./build/assets/css/styles.css --use autoprefixer -d ./build/assets/css/",
+    "build:imgs": "mkdir -p build/assets/imgs && cp -r src/imgs/ build/assets/imgs/.",
+    "build:favicons": "cp -r src/favicon/. build/.",
     "clean": "rm -rf build",
     "dev": "npm run build && npm run watch",
     "lint:scripts": "eslint src/js/scripts.js",
     "lint:styles": "sass-lint './src/scss/**.scss' -v -q",
     "prebuild:scripts": "rm -rf build/assets/js && mkdir build/assets/js",
     "serve": "browser-sync start --server 'build' --files 'build'",
-    "watch": "parallelshell 'npm run serve' 'npm run watch:html' 'npm run watch:styles' 'npm run watch:scripts'",
+    "watch": "npm-run-all serve watch:html watch:styles watch:scripts",
     "watch:html": "onchange 'src/**.html' -- npm run build:html",
     "watch:scripts": "onchange 'src/**.js' -- npm run build:scripts",
-    "watch:styles": "onchange 'src/**.scss' -- npm run build:styles"
+    "watch:styles": "onchange 'src/**.scss' -- npm run build:styles",
+    "watch:imgs": "onchange 'src/imgs/**/*' -- npm run build:imgs"
   },
   "author": "Andrew Dyton",
   "license": "MIT",
@@ -34,8 +37,10 @@
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.2",
     "onchange": "^3.2.1",
-    "parallelshell": "^2.0.0",
     "postcss-cli": "^4.0.0",
     "sass-lint": "^1.10.2"
+  },
+  "dependencies": {
+    "prun arallelshell": "^2.0.0"
   }
 }
