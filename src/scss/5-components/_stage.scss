@@ -1,0 +1,49 @@
+.stage {
+  border: none;
+  // min-height: 170px;
+  min-height: 30.9375vw;
+  width: 55%;
+  margin: 8% auto;
+  margin: 8.203125vw auto 7.8125vw;
+  // margin: 42px auto 40px;
+  background: black;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+
+  [class*="curtain"] {
+    position: absolute;
+    background: linear-gradient(to right, #a90329 0%,#8f0222 24%,#8f0222 54%,#c63b3d 86%,#6d0019 100%);
+    background-size: 17%;
+    width: 60%;
+    height: 100%;
+    margin-left: -9.8%;
+    transition: width 1s, transform 1s;
+  }
+
+  [class*="-right"] {
+    right: 0;
+    margin-right: -9.8%;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+
+  // &:hover:not([disabled]):not([data-touch]),
+  // &.hover:not([disabled]) {
+  &.hover {
+    [class*="-left"] {
+      width: 0;
+      transform: matrix(1, 0, -0.2, 1, 0, 0);
+    }
+    [class*="-right"] {
+      width: 0;
+      transform: matrix(-1, 0, 0.2, 1, 0, 0);
+    }
+  }
+
+  img,
+  video {
+    background-color: $black;
+    height: auto;
+    width: 100%;
+  }
+}
