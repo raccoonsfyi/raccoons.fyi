@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // Stage element
   const stage = document.querySelector('.stage');
+
+  // Stage helper funcs
   const addHover = () => stage.classList.add('hover');
   const removeHover = () => stage.classList.remove('hover');
   const toggleHover = (event) => {
@@ -11,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  // Stage events
   stage.addEventListener('touchstart', () => stage.setAttribute('data-touch', 'true'));
   stage.addEventListener('touchend', toggleHover);
 
+  // Request maker
   const requestMaker = function (searchTerm = 'raccoon') {
     return new Request(`https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=${searchTerm}`, {
       method: 'GET',
@@ -22,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  // Autoplay checker
   const canAutoplay = new Promise((resolve, reject) => {
     const video = document.createElement('video');
     video.className = 'visuallyhidden';
@@ -41,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(video);
   });
 
+  // Fetch dat gif (or mp4)
   fetch(requestMaker())
     .then(response => response.json())
     .then((json) => {
@@ -63,10 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const onready = () => {
-          console.log('ready')
           stage.removeAttribute('disabled');
-          media.removeEventListener(ready, onready)
-        }
+          media.removeEventListener(ready, onready);
+
+          /*const yaySound = document.createElement('audio');
+          yaySound.src = "https://c6.rbxcdn.com/d29ab66b69e75d810d4e446fb36754d2";
+          document.body.appendChild(yaySound);
+          const playYay = () => yaySound.play();
+
+          stage.addEventListener('touchstart', playYay);
+          stage.addEventListener('mouseover', playYay);*/
+        };
 
         media.addEventListener(ready, onready);
 

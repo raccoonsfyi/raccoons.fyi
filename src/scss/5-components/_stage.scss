@@ -1,5 +1,7 @@
 .stage {
+  box-shadow: 0 0 0 2px rgba(0,0,0,.86);
   border: none;
+  border-radius: 0.8vw;
   // min-height: 170px;
   min-height: 30.9375vw;
   width: 55%;
@@ -7,6 +9,7 @@
   margin: 8.203125vw auto 7.8125vw;
   // margin: 42px auto 40px;
   background: black;
+  opacity: 0.99;
   overflow: hidden;
   position: relative;
   padding: 0;
