@@ -492,6 +492,7 @@ button {
   margin: 8% auto;
   margin: 8.203125vw auto 7.8125vw;
   background: black;
+  opacity: 0.99;
   overflow: hidden;
   position: relative;
   padding: 0; }
